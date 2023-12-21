@@ -3,10 +3,10 @@ import threading
 import time
 import tkinter.filedialog   # 导入文件选择对话框模块
 # 导入自定义模块
-import chat_register_panel
-import chat_main_panel
-import chat_login_panel
-import chat_client
+import register_panel
+import main_panel
+import login_panel
+import client
 
 chat_user = "【群聊】"  # 生命全局变量默认为群聊
 
@@ -85,7 +85,7 @@ def handding_register():
     # 创建chat_register_panel模块的注册界面的对象，把此类关闭注册页面前往登录界面的函数close_register_window,
     # 注册按钮事件函数register_submi,打开文件对话框添加头像函数作为参数
     # 可以把chat_login_pannel模块的事件绑定在这几个函数上
-    register_frame = chat_register_panel.RegisterPanel(file_open_face, close_register_window, register_submit)
+    register_frame = register_panel.RegisterPanel(file_open_face, close_register_window, register_submit)
     # 调用对象的实例方法显示注册界面
     register_frame.show_register_panel()
     register_frame.load()
@@ -97,7 +97,7 @@ def close_register_window():
     # 创建chat_login_panel模块的登录界面的对象，把此类登录处理函数handding_login,
     # 注册处理函数作handding_register，关闭登录界面客户端的socket的close_login_window作为参数
     # 可以把chat_login_pannel模块的事件绑定在这几个函数上
-    login_frame = chat_login_panel.LoginPanel(handding_login, handding_register, close_login_window)
+    login_frame = login_panel.LoginPanel(handding_login, handding_register, close_login_window)
     login_frame.show_login_panel()  # 对象调用聊天主界面对象的实例方法
     login_frame.load()  # 调用对象实例方法加载动图，以及显示界面
 
@@ -164,7 +164,7 @@ def go_to_main_panel(user_name):
     # 创建chat_main_panel模块的对象，把用户名，此类的发送消息函数，发送表情包标记函数，
     # 私聊功能函数，关闭聊天界面函数作为参数
     # 可以把chat_main_panel模块的事件绑定在这几个函数上
-    main_frame = chat_main_panel.MainPanel(user_name, send_message, send_mark, refurbish_user, private_talk, close_main_window)
+    main_frame = main_panel.MainPanel(user_name, send_message, send_mark, refurbish_user, private_talk, close_main_window)
     # 创建子线程专门负责接收并处理数据
     threading.Thread(target=recv_data).start()
     main_frame.show_main_panel()  # 对象调用聊天主界面对象的实例方法创建组件布局
@@ -208,12 +208,12 @@ def recv_data():
 #  前往登录界面，同时开启客户端口连接连接服务器的函数
 def go_to_login_panel():
     global client  # 声明全局变量，可以在其他函数使用
-    client = chat_client.ChatSocket()  # 创建chat_client模块中的客户端连接服务器的socket对象
+    client = client.ChatSocket()  # 创建chat_client模块中的客户端连接服务器的socket对象
     global login_frame # 声明全局变量，可以在其他函数使用
     # 创建chat_login_panel模块的登录界面的对象，把此类登录处理函数handding_login,
     # 注册处理函数作handding_register，关闭登录界面客户端的socket中close_login_window函数作为参数
     # 可以把chat_login_pannel模块的事件绑定在这几个函数上
-    login_frame = chat_login_panel.LoginPanel(handding_login, handding_register, close_login_window)
+    login_frame = login_panel.LoginPanel(handding_login, handding_register, close_login_window)
     login_frame.show_login_panel()  # 对象调用聊天主界面对象的实例方法创建组件以及布局
     login_frame.load()  # 调用对象实例方法加载动图并显示界面
 

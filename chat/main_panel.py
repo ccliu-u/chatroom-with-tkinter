@@ -1,7 +1,7 @@
 from tkinter import *  # 导入模块，用户创建GUI界面
 import tkinter.font as tf  # 处理字体样式和颜色的类
 import time
-import chat.mysql as mysql  # 导入处理mysql的模块
+import mysql  # 导入处理mysql的模块
 from PIL import Image  # 导入处理图像模块
 
 # 主界面类

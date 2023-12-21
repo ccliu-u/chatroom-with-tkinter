@@ -1,7 +1,7 @@
 import socket  # 导入套接字socket模块
 from threading import Thread  # 导入多线程模块
 import math
-import chat.mysql as mysql  # 导入自定义模块用于在mysql中处理用户数据
+import mysql  # 导入自定义模块用于在mysql中处理用户数据
 
 # 维护一个在线用户的连接列表，用于群发消息
 online_connection = list()
