@@ -1,7 +1,7 @@
 import socket  # 导入套接字socket模块
 from threading import Thread  # 导入多线程模块
 import math
-import chat_mysql  # 导入自定义模块用于在mysql中处理用户数据
+import chat.mysql as mysql  # 导入自定义模块用于在mysql中处理用户数据
 
 # 维护一个在线用户的连接列表，用于群发消息
 online_connection = list()
@@ -40,14 +40,14 @@ def recv_all_string(connection):
 # 检查用户名密码是否正确函数
 def check_user(user_name, password):
     # 调用数据库模块检查用户名和密码
-    return chat_mysql.LogInformation.login_check(user_name, password)
+    return mysql.LogInformation.login_check(user_name, password)
 
 # 添加用户函数
 def add_user(user_name, password, file_name):
     # 调用数据库模块中的函数添加用户，成功返回1，已有用户返回0，其他错误返回2
-    if chat_mysql.LogInformation.select_user_name(user_name) == "1":
+    if mysql.LogInformation.select_user_name(user_name) == "1":
         return "1"
-    elif chat_mysql.LogInformation.create_new_user(user_name, password, file_name) == "0":
+    elif mysql.LogInformation.create_new_user(user_name, password, file_name) == "0":
         return "0"
     else:
         return "2"

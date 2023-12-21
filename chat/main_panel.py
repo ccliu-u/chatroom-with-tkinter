@@ -1,7 +1,7 @@
 from tkinter import *  # 导入模块，用户创建GUI界面
 import tkinter.font as tf  # 处理字体样式和颜色的类
 import time
-import chat_mysql  # 导入处理mysql的模块
+import chat.mysql as mysql  # 导入处理mysql的模块
 from PIL import Image  # 导入处理图像模块
 
 # 主界面类
@@ -391,7 +391,7 @@ class MainPanel:
                 self.message_text.insert(END, title, 'tag_7')
                 self.sava_chatting_records(title)
         if content in self.dic:  # 判断消息是否为表情标记
-            chat_mysql.LogInformation.fing_face(user_name)  # 去数据库中读取用户的头像
+            mysql.LogInformation.fing_face(user_name)  # 去数据库中读取用户的头像
             time.sleep(0.5)   # 设置时间缓冲，给数据库读取用户头像以及保存到本地文件的时间缓冲
             # 打开图片
             self.img1 = Image.open(f"./头像/{user_name}头像.png")  # 打开数据库保存的本地文件
@@ -411,7 +411,7 @@ class MainPanel:
             self.message_text.see(END)
         # 内容是消息的处理
         elif content != '* 系统提示: ' + user_name + ' 加入聊天室' and content != '* 系统提示: ' + user_name + ' 已离开群聊':
-            chat_mysql.LogInformation.fing_face(user_name)
+            mysql.LogInformation.fing_face(user_name)
             time.sleep(0.5)
             # 打开图片
             self.img2 = Image.open(f"./头像/{user_name}头像.png")
